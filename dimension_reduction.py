@@ -11,23 +11,36 @@ from helper import lead_and_prepare_data, load_gas_data
 
 def pca(X_train, n_comp):
     xtrain = PCA(n_components=n_comp).fit_transform(X_train)
-    fig = plt.figure(figsize=(8,8))
-    ax = fig.add_subplot(111, projection='3d') 
-    ax.plot(xtrain[0:4208261,0], xtrain[0:4208261,1], xtrain[0:4208261,2], markersize=8, label='ethylene_CO')
-    ax.plot(xtrain[1048575:8386765,0], xtrain[1048575:8386765,1], xtrain[1048575:8386765,2], markersize=8, label='ethylene_methane')
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, projection="3d")
+    ax.plot(
+        xtrain[0:4208261, 0],
+        xtrain[0:4208261, 1],
+        xtrain[0:4208261, 2],
+        markersize=8,
+        label="ethylene_CO",
+    )
+    ax.plot(
+        xtrain[1048575:8386765, 0],
+        xtrain[1048575:8386765, 1],
+        xtrain[1048575:8386765, 2],
+        markersize=8,
+        label="ethylene_methane",
+    )
 
     # label the axes
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
     ax.set_zlabel("PC3")
     ax.set_title("PCA on gas sensor binary dataset")
-    ax.legend(loc='upper right')
+    ax.legend(loc="upper right")
 
     # show plot
     # plt.show()
     # save plot to file
-    plt.savefig('output/pca2.png')
-    
+    plt.savefig("output/pca2.png")
+
+
 # function to fit PCA on data
 def apply_pca(data, n_components):
     pca = PCA(n_components=n_components)
@@ -56,8 +69,9 @@ def visualize_data(data, labels, title, ax_labels):
         ax.set_xlabel(ax_labels[0])
         ax.set_ylabel(ax_labels[1])
         ax.set_title(title)
-    plt.savefig(f'output/images/visualization/{title}.png')
+    plt.savefig(f"output/images/visualization/{title}.png")
     # plt.show()
+
 
 def apply_lda(data, labels, n_components):
     lda = LinearDiscriminantAnalysis(n_components=n_components)
@@ -65,18 +79,20 @@ def apply_lda(data, labels, n_components):
     transformed_data = lda.transform(data)
     return pd.DataFrame(transformed_data, columns=["LD1", "LD2"])
 
+
 def apply_tsne(data, n_components):
     tsne = TSNE(n_components=n_components)
     tsne.fit(data)
     transformed_data = tsne.fit_transform(data)
     return pd.DataFrame(transformed_data, columns=["TSNE1", "TSNE2"])
 
+
 def main():
     """
     Main function
     """
     # X_train, X_test, y_train, y_test = lead_and_prepare_data()
-    X, X_test, y, y_test = load_gas_data('Data/data/expanded_data.csv')
+    X, X_test, y, y_test = load_gas_data("Data/data/expanded_data.csv")
     X, y = np.array(X), np.array(y)
     pc = apply_pca(X, 2)
     pc_data = get_pca_data(pc, X)

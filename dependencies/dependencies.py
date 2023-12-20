@@ -30,7 +30,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
 from sklearn.decomposition import PCA
 import matplotlib as mpl
-mpl.rcParams['agg.path.chunksize'] = 1000
+
+mpl.rcParams["agg.path.chunksize"] = 1000
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.manifold import TSNE
 import os
