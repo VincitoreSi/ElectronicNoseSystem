@@ -56,8 +56,8 @@ def visualize_data(data, labels, title, ax_labels):
         ax.set_xlabel(ax_labels[0])
         ax.set_ylabel(ax_labels[1])
         ax.set_title(title)
+    plt.savefig(f'output/images/visualization/{title}.png')
     # plt.show()
-    plt.savefig(f'output/{title}.png')
 
 def apply_lda(data, labels, n_components):
     lda = LinearDiscriminantAnalysis(n_components=n_components)
@@ -76,14 +76,15 @@ def main():
     Main function
     """
     # X_train, X_test, y_train, y_test = lead_and_prepare_data()
-    X, y = load_gas_data('Data/data/expanded_data.csv')
+    X, X_test, y, y_test = load_gas_data('Data/data/expanded_data.csv')
+    X, y = np.array(X), np.array(y)
     pc = apply_pca(X, 2)
     pc_data = get_pca_data(pc, X)
-    visualize_data(pc_data, y, "PCA on gas sensor binary dataset", ["PC1", "PC2"])
+    visualize_data(pc_data, y, "PCA_on_gas_sensor_binary_dataset", ["PC1", "PC2"])
     ld = apply_lda(X, y, 2)
-    visualize_data(ld, y, "LDA on gas sensor binary dataset", ["LD1", "LD2"])
+    visualize_data(ld, y, "LDA_on_gas_sensor_binary_dataset", ["LD1", "LD2"])
     tsne = apply_tsne(X, 2)
-    visualize_data(tsne, y, "TSNE on gas sensor binary dataset", ["TSNE1", "TSNE2"])
+    visualize_data(tsne, y, "TSNE_on_gas_sensor_binary_dataset", ["TSNE1", "TSNE2"])
 
 
 if __name__ == "__main__":

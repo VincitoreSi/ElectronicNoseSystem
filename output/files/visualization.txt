@@ -1,0 +1,3 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)

@@ -78,7 +78,10 @@ def plot_confusion_matrix(cm, classes,
 
 
 def load_gas_data(path):
+    print("Loading data...")
     data = pd.read_csv(path)
     X = data.iloc[:, :-2]
     y = data.iloc[:, -2]
-    return np.array(X), np.array(y)
+    print(f"X shape: {X.shape}\ny shape: {y.shape}")
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1,random_state=1)
+    return X_train, X_test, y_train, y_test

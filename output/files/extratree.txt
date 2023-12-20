@@ -1,0 +1,19 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+Extra Tree classifier
+max_depth:  10
+Training...
+Training time: 0.104s
+Testing...
+Testing time: 0.008s
+Accuracy:  1.0
+Confusion matrix:
+Confusion matrix, without normalization
+[[27  0  0]
+ [ 0 20  0]
+ [ 0  0 23]]
+Normalized confusion matrix
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]

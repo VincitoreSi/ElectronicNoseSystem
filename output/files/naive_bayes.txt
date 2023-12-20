@@ -1,0 +1,18 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+Naive Bayes classifier
+Training...
+Training time: 0.002s
+Testing...
+Testing time: 0.001s
+Accuracy:  0.8428571428571429
+Confusion matrix:
+Confusion matrix, without normalization
+[[26  1  0]
+ [ 4 13  3]
+ [ 3  0 20]]
+Normalized confusion matrix
+[[0.96 0.04 0.  ]
+ [0.2  0.65 0.15]
+ [0.13 0.   0.87]]

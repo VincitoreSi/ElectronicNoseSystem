@@ -25,7 +25,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import VotingClassifier
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import svm
 from sklearn.decomposition import PCA
@@ -33,3 +33,5 @@ import matplotlib as mpl
 mpl.rcParams['agg.path.chunksize'] = 1000
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.manifold import TSNE
+import os
+import sys

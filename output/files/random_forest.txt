@@ -1,0 +1,19 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+Random Forest classifier
+n_estimators:  100
+Training...
+Training time: 0.184s
+Testing...
+Testing time: 0.008s
+Accuracy:  0.9571428571428572
+Confusion matrix:
+Confusion matrix, without normalization
+[[24  3  0]
+ [ 0 20  0]
+ [ 0  0 23]]
+Normalized confusion matrix
+[[0.89 0.11 0.  ]
+ [0.   1.   0.  ]
+ [0.   0.   1.  ]]
