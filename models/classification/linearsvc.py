@@ -36,7 +36,7 @@ class LinearSVCModel(BaseModel):
                 fit_intercept=True,
                 intercept_scaling=1,
                 loss="squared_hinge",
-                max_iter=1000,
+                max_iter=5000,
                 multi_class="ovr",
                 penalty="l2",
                 random_state=None,

@@ -1,10 +1,9 @@
 Loading data...
 X shape: (693, 2)
 y shape: (693,)
-Random Forest classifier
-n_estimators:  100
+RandomForestClassifier classifier
 Training...
-Training time: 0.184s
+Training time: 0.166s
 Testing...
 Testing time: 0.008s
 Accuracy:  0.9571428571428572

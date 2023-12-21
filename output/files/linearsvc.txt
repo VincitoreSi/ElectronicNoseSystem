@@ -3,7 +3,7 @@ X shape: (693, 2)
 y shape: (693,)
 LinearSVC classifier
 Training...
-Training time: 0.068s
+Training time: 0.066s
 Testing...
 Testing time: 0.001s
 Accuracy:  0.6142857142857143

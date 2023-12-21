@@ -1,11 +1,9 @@
 Loading data...
 X shape: (693, 2)
 y shape: (693,)
-AdaBoost classifier
-n_estimators:  100
-learning_rate:  1
+AdaBoostClassifier classifier
 Training...
-Training time: 0.186s
+Training time: 0.184s
 Testing...
 Testing time: 0.018s
 Accuracy:  0.8857142857142857

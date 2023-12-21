@@ -1,6 +1,4 @@
 .venv
 Data/data/
 Data/dataset/
-__pycache__/
-dependencies/__pycache__/
-models/__pycache__/
+**/__pycache__/

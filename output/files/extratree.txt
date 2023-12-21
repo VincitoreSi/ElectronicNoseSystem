@@ -1,10 +1,9 @@
 Loading data...
 X shape: (693, 2)
 y shape: (693,)
-Extra Tree classifier
-max_depth:  10
+ExtraTreeClassifier classifier
 Training...
-Training time: 0.104s
+Training time: 0.105s
 Testing...
 Testing time: 0.008s
 Accuracy:  1.0

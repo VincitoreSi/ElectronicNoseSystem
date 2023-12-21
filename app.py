@@ -5,16 +5,16 @@ from sklearn.preprocessing import LabelEncoder
 from joblib import dump
 import base64
 from dependencies.dependencies import *
-from models.adaboost import AdaBoost
-from models.baggingknn import BaggingKNN
-from models.decisiontree import DecisionTree
-from models.extratree import ExtraTree
-from models.knn import KNN
-from models.linearsvc import LinearSVCModel
-from models.logistic import LogisticModel
-from models.naive_bayes import NaiveBayes
-from models.random_forest import RandomForest
-from models.voting import VotingModel
+from models.classification.adaboost import AdaBoost
+from models.classification.baggingknn import BaggingKNN
+from models.classification.decisiontree import DecisionTree
+from models.classification.extratree import ExtraTree
+from models.classification.knn import KNN
+from models.classification.linearsvc import LinearSVCModel
+from models.classification.logistic import LogisticModel
+from models.classification.naive_bayes import NaiveBayes
+from models.classification.random_forest import RandomForest
+from models.classification.voting import VotingModel
 
 
 from helper import *
