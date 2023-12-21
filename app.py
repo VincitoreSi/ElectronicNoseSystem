@@ -161,7 +161,9 @@ if uploaded_file is not None:
         st.write(f"Accuracy: {voting.results['accuracy']: .3f}")
 
     elif model == "KNN with Bagging":
-        baggingknn = BaggingKNN(X_train, X_test, y_train, y_test, classes, 100, 0.5, 0.5)
+        baggingknn = BaggingKNN(
+            X_train, X_test, y_train, y_test, classes, 100, 0.5, 0.5
+        )
         baggingknn.train()
         baggingknn.test()
         dump(baggingknn.model, "output/models/baggingknn.joblib")
@@ -188,7 +190,7 @@ if uploaded_file is not None:
         st.write(f"Accuracy: {decisiontree.results['accuracy']: .3f}")
 
     elif model == "Extra Trees":
-        extratree = ExtraTree(X_train, X_test, y_train, y_test, classes)
+        extratree = ExtraTree(X_train, X_test, y_train, y_test, 10, classes)
         extratree.train()
         extratree.test()
         dump(extratree.model, "output/models/extratree.joblib")

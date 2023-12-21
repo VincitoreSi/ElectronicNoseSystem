@@ -36,3 +36,21 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.manifold import TSNE
 import os
 import sys
+
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import SGDRegressor
+from sklearn.svm import SVR
+from sklearn.linear_model import BayesianRidge
+from sklearn.linear_model import LinearRegression
+from xgboost import XGBRegressor
+
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    median_absolute_error,
+    r2_score,
+    explained_variance_score,
+    max_error,
+    mean_squared_log_error,
+)
