@@ -29,20 +29,21 @@ class LinearRegressionModel(BaseModel):
             y_test,
         )
 
-def main():
+def main(cls):
     """The main function"""
-    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", 1)
+    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", cls)
     shape = 1 if len(y_train.shape) == 1 else y_train.shape[1]
     if shape == 1:
         linear_regression = LinearRegressionModel(X_train, X_test, y_train, y_test)
-        linear_regression.train()
-        linear_regression.test()
+        linear_regression.run()
+        linear_regression.save(cls)
     else:
         for i in range(shape):
             linear_regression = LinearRegressionModel(X_train, X_test, y_train.iloc[:, i], y_test.iloc[:, i])
-            linear_regression.train()
-            linear_regression.test()
+            linear_regression.run()
+            linear_regression.save(cls)
 
 
 if __name__ == "__main__":
-    main()
+    for i in range(1, 4):
+        main(i)

@@ -1,0 +1,67 @@
+Loading data...
+   Sensor 1  Sensor 2                 ppm
+0  0.049530  0.078660                  50
+1  0.053501  0.123672   49.97291787483829
+2  0.095864  0.106917  49.957778955136966
+3  0.012650  0.043045   50.00473622208033
+4  0.050791  0.047559  50.017642698846856
+X shape: (231, 2)
+y shape: (231,)
+Model: SGDRegressor
+Mean Absolute Error: 10.262
+Mean Squared Error: 175.835
+Median Absolute Error: 9.306
+R2 Score: 0.978
+Explained Variance Score: 0.978
+Max Error: 25.713
+Mean Squared Log Error: 0.017
+Training Time: 0.003
+Test Time: 0.001
+Loading data...
+   Sensor 1  Sensor 2                 ppm
+0  0.604400  0.070900                 190
+1  0.638171  0.081363  190.04878710821345
+2  0.610878  0.058161  190.03376125530818
+3  0.644497  0.099696  190.01461505033353
+4  0.554837  0.021851  190.02439335289856
+X shape: (231, 2)
+y shape: (231,)
+Model: SGDRegressor
+Mean Absolute Error: 25.148
+Mean Squared Error: 1040.561
+Median Absolute Error: 19.941
+R2 Score: 0.991
+Explained Variance Score: 0.991
+Max Error: 71.740
+Mean Squared Log Error: 0.003
+Training Time: 0.002
+Test Time: 0.001
+Loading data...
+   Sensor 1  Sensor 2       ppm1        ppm2
+0  1.431610  0.296200  50.000000  190.000000
+1  1.416948  0.310255  50.039527  190.039527
+2  1.454967  0.282406  49.957213  189.957213
+3  1.439592  0.287774  50.003010  190.003010
+4  1.430389  0.269867  49.966168  189.966168
+X shape: (231, 2)
+y shape: (231, 2)
+Model: SGDRegressor
+Mean Absolute Error: 16.705
+Mean Squared Error: 543.466
+Median Absolute Error: 8.599
+R2 Score: 0.931
+Explained Variance Score: 0.931
+Max Error: 48.834
+Mean Squared Log Error: 0.023
+Training Time: 0.007
+Test Time: 0.001
+Model: SGDRegressor
+Mean Absolute Error: 63.580
+Mean Squared Error: 7454.127
+Median Absolute Error: 39.314
+R2 Score: 0.935
+Explained Variance Score: 0.935
+Max Error: 179.922
+Mean Squared Log Error: 0.026
+Training Time: 0.008
+Test Time: 0.001

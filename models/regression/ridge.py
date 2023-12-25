@@ -29,19 +29,20 @@ class RidgeRegressionModel(BaseModel):
             y_test,
         )
 
-def main():
+def main(cls):
     """The main function"""
-    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
+    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", cls)
     shape = 1 if len(y_train.shape) == 1 else y_train.shape[1]
     if shape == 1:
         ridge_regression = RidgeRegressionModel(X_train, X_test, y_train, y_test)
-        ridge_regression.train()
-        ridge_regression.test()
+        ridge_regression.run()
+        ridge_regression.save(cls)
     else:
         for i in range(shape):
             ridge_regression = RidgeRegressionModel(X_train, X_test, y_train.iloc[:, i], y_test.iloc[:, i])
-            ridge_regression.train()
-            ridge_regression.test()
+            ridge_regression.run()
+            ridge_regression.save(cls)
 
 if __name__ == "__main__":
-    main()
+    for i in range(1, 4):
+        main(i)

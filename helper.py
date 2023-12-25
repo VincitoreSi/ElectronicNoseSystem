@@ -104,12 +104,36 @@ def load_gas_data(path):
     return X_train, X_test, y_train, y_test
 
 
-def preprocess_data(df):
+def preprocess_data_clf(df):
     X = df.iloc[:, :-2]
     y = df.iloc[:, -2]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.1, random_state=1
     )
+    return X_train, X_test, y_train, y_test
+
+def preprocess_data_reg(df):
+    # add extra two columns for gas conc. separating from '+' in conc. column 
+    # ppm1 will have the value of gas conc. when class is 1 and ppm2 will have the value of gas conc. when class is 2 and if class is 3 then split the conc. column and add two columns ppm1 and ppm2
+    df1 = df[df["GasType"] == 1]
+    df1 = df1.drop(columns=["GasType"], axis=1)
+    df1.reset_index(drop=True)
+    df1['ppm1'] = df1['ppm']
+    df1['ppm2'] = 0
+    df2 = df[df["GasType"] == 2]
+    df2 = df2.drop(columns=["GasType"], axis=1)
+    df2.reset_index(drop=True)
+    df2['ppm1'] = 0
+    df2['ppm2'] = df2['ppm']
+    df3 = df[df["GasType"] == 3]
+    df3 = df3.drop(columns=["GasType"], axis=1)
+    df3.reset_index(drop=True)
+    df3['ppm1'] = df3['ppm'].apply(lambda x: float(x.split('+')[0]))
+    df3['ppm2'] = df3['ppm'].apply(lambda x: float(x.split('+')[1]))
+    df = pd.concat([df1, df2, df3])
+    X = df.iloc[:, :-2]
+    y = df.iloc[:, -2:]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=1)
     return X_train, X_test, y_train, y_test
 
 def load_gas_data_for_regression(path, cls):

@@ -1,0 +1,67 @@
+Loading data...
+   Sensor 1  Sensor 2                 ppm
+0  0.049530  0.078660                  50
+1  0.053501  0.123672   49.97291787483829
+2  0.095864  0.106917  49.957778955136966
+3  0.012650  0.043045   50.00473622208033
+4  0.050791  0.047559  50.017642698846856
+X shape: (231, 2)
+y shape: (231,)
+Model: SVMRegression
+Mean Absolute Error: 33.545
+Mean Squared Error: 1677.070
+Median Absolute Error: 24.916
+R2 Score: 0.787
+Explained Variance Score: 0.789
+Max Error: 73.070
+Mean Squared Log Error: 0.119
+Training Time: 0.004
+Test Time: 0.002
+Loading data...
+   Sensor 1  Sensor 2                 ppm
+0  0.604400  0.070900                 190
+1  0.638171  0.081363  190.04878710821345
+2  0.610878  0.058161  190.03376125530818
+3  0.644497  0.099696  190.01461505033353
+4  0.554837  0.021851  190.02439335289856
+X shape: (231, 2)
+y shape: (231,)
+Model: SVMRegression
+Mean Absolute Error: 242.843
+Mean Squared Error: 81180.169
+Median Absolute Error: 216.575
+R2 Score: 0.293
+Explained Variance Score: 0.319
+Max Error: 510.268
+Mean Squared Log Error: 0.247
+Training Time: 0.005
+Test Time: 0.002
+Loading data...
+   Sensor 1  Sensor 2       ppm1        ppm2
+0  1.431610  0.296200  50.000000  190.000000
+1  1.416948  0.310255  50.039527  190.039527
+2  1.454967  0.282406  49.957213  189.957213
+3  1.439592  0.287774  50.003010  190.003010
+4  1.430389  0.269867  49.966168  189.966168
+X shape: (231, 2)
+y shape: (231, 2)
+Model: SVMRegression
+Mean Absolute Error: 44.100
+Mean Squared Error: 2990.610
+Median Absolute Error: 36.822
+R2 Score: 0.620
+Explained Variance Score: 0.659
+Max Error: 109.455
+Mean Squared Log Error: 0.100
+Training Time: 0.006
+Test Time: 0.002
+Model: SVMRegression
+Mean Absolute Error: 264.308
+Mean Squared Error: 94462.072
+Median Absolute Error: 227.221
+R2 Score: 0.177
+Explained Variance Score: 0.211
+Max Error: 539.455
+Mean Squared Log Error: 0.281
+Training Time: 0.004
+Test Time: 0.001

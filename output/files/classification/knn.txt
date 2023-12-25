@@ -1,0 +1,24 @@
+Loading data...
+X shape: (24, 3)
+y shape: (24,)
+KNeighborsClassifier classifier
+Training...
+Training time: 0.002s
+Testing...
+Testing time: 0.053s
+Accuracy:  0.125
+Confusion matrix:
+Confusion matrix, without normalization
+[[1 0 0 0 0 0]
+ [1 0 0 0 0 0]
+ [1 0 0 0 0 0]
+ [2 0 0 0 0 0]
+ [2 0 0 0 0 0]
+ [1 0 0 0 0 0]]
+Normalized confusion matrix
+[[1. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0.]]

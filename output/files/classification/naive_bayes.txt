@@ -1,0 +1,18 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+GaussianNB classifier
+Training...
+Training time: 0.003s
+Testing...
+Testing time: 0.003s
+Accuracy:  0.8365384615384616
+Confusion matrix:
+Confusion matrix, without normalization
+[[67  6  0]
+ [10 49 11]
+ [ 7  0 58]]
+Normalized confusion matrix
+[[0.92 0.08 0.  ]
+ [0.14 0.7  0.16]
+ [0.11 0.   0.89]]

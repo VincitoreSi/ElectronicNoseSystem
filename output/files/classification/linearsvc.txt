@@ -1,0 +1,18 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+LinearSVC classifier
+Training...
+Training time: 0.065s
+Testing...
+Testing time: 0.001s
+Accuracy:  0.6730769230769231
+Confusion matrix:
+Confusion matrix, without normalization
+[[41  0 32]
+ [19 49  2]
+ [ 0 15 50]]
+Normalized confusion matrix
+[[0.56 0.   0.44]
+ [0.27 0.7  0.03]
+ [0.   0.23 0.77]]

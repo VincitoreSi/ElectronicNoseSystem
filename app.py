@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from joblib import dump
 import base64
 from dependencies.dependencies import *
 from models.classification.adaboost import AdaBoost
@@ -15,6 +14,10 @@ from models.classification.logistic import LogisticModel
 from models.classification.naive_bayes import NaiveBayes
 from models.classification.random_forest import RandomForest
 from models.classification.voting import VotingModel
+from models.regression.svm import SVMRegressionModel
+from models.regression.linear import LinearRegressionModel
+from models.regression.ridge import RidgeRegressionModel
+from models.regression.elasticnet import ElasticNetRegressionModel
 
 
 from helper import *
@@ -31,7 +34,7 @@ def get_download_link(file_path):
 
 
 # Title
-st.title("Gas Classification")
+st.title("Electronic Nose for Gas Identification")
 
 
 # File upload
@@ -42,7 +45,7 @@ if uploaded_file is not None:
     st.write(data)
 
     # Preprocess data
-    X_train, X_test, y_train, y_test = preprocess_data(data)
+    X_train, X_test, y_train, y_test = preprocess_data_clf(data)
 
     visualization_type = st.selectbox(
         "Select a visualization type",
@@ -228,5 +231,22 @@ if uploaded_file is not None:
         st.write(f"Testing time: {linear_svc.results['testing_time']: .3f}s")
         st.write(f"Accuracy: {linear_svc.results['accuracy']: .3f}")
 
-    else:
-        st.write("Model not implemented yet")
+    X_train, X_test, y_train, y_test = preprocess_data_reg(data)
+    print(X_train, X_test, y_train, y_test)
+    st.write(X_train)
+    st.write(X_test)
+    st.write(y_train)
+    st.write(y_test)
+    
+    # Model selection
+    model = st.selectbox(
+        "Select a model",
+        (
+            "Linear Regression",
+            "Ridge Regression",
+            "Elastic Net",
+            "SVM",
+        ),
+    )
+    
+    # 

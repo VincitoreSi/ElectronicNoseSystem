@@ -38,9 +38,8 @@ def main():
     X_train, X_test, y_train, y_test = load_gas_data("Data/data/expanded_data.csv")
     classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
     random_forest = RandomForest(X_train, X_test, y_train, y_test, 100, classes)
-    random_forest.train()
-    random_forest.test()
-
+    random_forest.run()
+    random_forest.save()
 
 if __name__ == "__main__":
     main()

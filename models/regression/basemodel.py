@@ -52,11 +52,17 @@ class BaseModel:
         print(f"Model: {self.name}")
         print(f"Mean Absolute Error: {mean_absolute_error(self.y_test, y_pred):.3f}")
         print(f"Mean Squared Error: {mean_squared_error(self.y_test, y_pred):.3f}")
-        print(f"Median Absolute Error: {median_absolute_error(self.y_test, y_pred):.3f}")
+        print(
+            f"Median Absolute Error: {median_absolute_error(self.y_test, y_pred):.3f}"
+        )
         print(f"R2 Score: {r2_score(self.y_test, y_pred):.3f}")
-        print(f"Explained Variance Score: {explained_variance_score(self.y_test, y_pred):.3f}")
+        print(
+            f"Explained Variance Score: {explained_variance_score(self.y_test, y_pred):.3f}"
+        )
         print(f"Max Error: {max_error(self.y_test, y_pred):.3f}")
-        print(f"Mean Squared Log Error: {mean_squared_log_error(self.y_test, y_pred):.3f}")
+        print(
+            f"Mean Squared Log Error: {mean_squared_log_error(self.y_test, y_pred):.3f}"
+        )
         print(f"Training Time: {self.results['train_time']:.3f}")
         print(f"Test Time: {self.results['test_time']:.3f}")
         self.results["MAE"] = mean_absolute_error(self.y_test, y_pred)
@@ -74,3 +80,18 @@ class BaseModel:
         :return: predicted values
         """
         return self.model.predict(X)
+
+    def save(self, cls):
+        """
+        Save the model
+        :return: None
+        """
+        dump(self.model, f"output/models/regression/{self.name}_{cls}.joblib")
+
+    def run(self):
+        """
+        Run the model
+        :return: None
+        """
+        self.train()
+        self.test()

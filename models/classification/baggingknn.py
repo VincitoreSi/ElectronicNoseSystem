@@ -57,9 +57,8 @@ def main():
     X_train, X_test, y_train, y_test = load_gas_data("Data/data/expanded_data.csv")
     classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
     baggingknn = BaggingKNN(X_train, X_test, y_train, y_test, classes, 100, 0.5, 0.5)
-    baggingknn.train()
-    baggingknn.test()
-
+    baggingknn.run()
+    baggingknn.save()
 
 if __name__ == "__main__":
     main()

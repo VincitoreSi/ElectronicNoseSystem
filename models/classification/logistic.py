@@ -37,9 +37,8 @@ def main():
     X_train, X_test, y_train, y_test = load_gas_data("Data/data/expanded_data.csv")
     classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
     logistic = LogisticModel(X_train, X_test, y_train, y_test, classes)
-    logistic.train()
-    logistic.test()
-
+    logistic.run()
+    logistic.save()
 
 if __name__ == "__main__":
     main()

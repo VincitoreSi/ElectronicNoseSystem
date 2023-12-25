@@ -29,19 +29,20 @@ class ElasticNetRegressionModel(BaseModel):
             y_test,
         )
 
-def main():
+def main(cls):
     """The main function"""
-    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", 2)
+    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", cls)
     shape = 1 if len(y_train.shape) == 1 else y_train.shape[1]
     if shape == 1:
         elasticnet_regression = ElasticNetRegressionModel(X_train, X_test, y_train, y_test)
-        elasticnet_regression.train()
-        elasticnet_regression.test()
+        elasticnet_regression.run()
+        elasticnet_regression.save(cls)
     else:
         for i in range(shape):
             elasticnet_regression = ElasticNetRegressionModel(X_train, X_test, y_train.iloc[:, i], y_test.iloc[:, i])
-            elasticnet_regression.train()
-            elasticnet_regression.test()
+            elasticnet_regression.run()
+            elasticnet_regression.save(cls)
 
 if __name__ == "__main__":
-    main()
+    for i in range(1, 4):
+        main(i)

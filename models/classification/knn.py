@@ -39,9 +39,8 @@ def main():
     # classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
     classes = {1: "Ethylene", 2: "Acetone", 3: "A", 4: "B", 5: "C", 6: "D"}
     knn = KNN(X_train, X_test, y_train, y_test, 14, classes)
-    knn.train()
-    knn.test()
-
+    knn.run()
+    knn.save()
 
 if __name__ == "__main__":
     main()

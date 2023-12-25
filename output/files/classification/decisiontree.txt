@@ -1,0 +1,18 @@
+Loading data...
+X shape: (693, 2)
+y shape: (693,)
+DecisionTreeClassifier classifier
+Training...
+Training time: 0.002s
+Testing...
+Testing time: 0.001s
+Accuracy:  0.9663461538461539
+Confusion matrix:
+Confusion matrix, without normalization
+[[67  6  0]
+ [ 1 69  0]
+ [ 0  0 65]]
+Normalized confusion matrix
+[[0.92 0.08 0.  ]
+ [0.01 0.99 0.  ]
+ [0.   0.   1.  ]]

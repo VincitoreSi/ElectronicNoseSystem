@@ -58,7 +58,7 @@ class BaseModel:
             classes=[self.classes[i] for i in cls],
             title=f"{self.model_name}: Confusion matrix, without normalization",
         )
-        plt.savefig(f"output/images/{self.model_name}_cm.png")
+        plt.savefig(f"output/images/classification/{self.model_name}_cm.png")
         plt.figure()
         plot_confusion_matrix(
             cnf_matrix,
@@ -66,7 +66,7 @@ class BaseModel:
             normalize=True,
             title=f"{self.model_name}: Normalized confusion matrix",
         )
-        plt.savefig(f"output/images/{self.model_name}_cm_normalized.png")
+        plt.savefig(f"output/images/classification/{self.model_name}_cm_normalized.png")
         # plt.show()
         self.results["testing_time"] = end - start
         self.results["accuracy"] = self.model.score(self.X_test, self.y_test)
@@ -79,3 +79,18 @@ class BaseModel:
         """
         self.train()
         self.test()
+
+    def predict(self, data):
+        """
+        Predict the data
+        :param data: data to predict
+        :return: prediction
+        """
+        return self.model.predict(data)
+
+    def save(self):
+        """
+        Save the model
+        :return: None
+        """
+        dump(self.model, f"output/models/classification/{self.model_name}.pkl")
