@@ -54,7 +54,7 @@ def get_pca_data(pca, data):
 
 
 # visualize the data to know if it is separable or not
-def visualize_data(data, labels, title, ax_labels):
+def visualize_data(data, labels, title, ax_labels, legend= ["Gas 1: Ethylene", "Gas 2: Acetone", "Mixture: Ethylene + Acetone"]):
     fig, ax = plt.subplots(figsize=(8, 8))
     colors = {"tab:blue": 1, "tab:orange": 2, "tab:green": 3}
     for color in colors.keys():
@@ -64,7 +64,7 @@ def visualize_data(data, labels, title, ax_labels):
             c=color,
             s=50,
         )
-        ax.legend(["Gas 1: Ethylene", "Gas 2: Acetone", "Mixture: Ethylene + Acetone"])
+        ax.legend(legend)
         ax.grid()
         ax.set_xlabel(ax_labels[0])
         ax.set_ylabel(ax_labels[1])

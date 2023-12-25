@@ -67,21 +67,26 @@ if mode == "Training":
         X, y = np.array(X_train), np.array(y_train)
 
         # show plot based on visualization type
+        legend = []
+        for i in range(len(data["GasType"].unique())):
+            legend.append(classes[i + 1])
         if visualization_type == "PCA":
             pc = apply_pca(X, 2)
             pc_data = get_pca_data(pc, X)
             visualize_data(
-                pc_data, y, "PCA_on_gas_sensor_binary_dataset", ["PC1", "PC2"]
+                pc_data, y, "PCA_on_gas_sensor_binary_dataset", ["PC1", "PC2"], legend
             )
             st.pyplot(plt)
         elif visualization_type == "LDA":
             ld = apply_lda(X, y, 2)
-            visualize_data(ld, y, "LDA_on_gas_sensor_binary_dataset", ["LD1", "LD2"])
+            visualize_data(
+                ld, y, "LDA_on_gas_sensor_binary_dataset", ["LD1", "LD2"], legend
+            )
             st.pyplot(plt)
         elif visualization_type == "TSNE":
             tsne = apply_tsne(X, 2)
             visualize_data(
-                tsne, y, "TSNE_on_gas_sensor_binary_dataset", ["TSNE1", "TSNE2"]
+                tsne, y, "TSNE_on_gas_sensor_binary_dataset", ["TSNE1", "TSNE2"], legend
             )
             st.pyplot(plt)
 
