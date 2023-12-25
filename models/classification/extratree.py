@@ -6,7 +6,7 @@ brief: Extra Tree classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -32,6 +32,17 @@ class ExtraTree(BaseModel):
             classes,
         )
 
+def app_extratree(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    extra_tree = ExtraTree(X_train, X_test, y_train, y_test, 10, classes)
+    extra_tree.run()
+    extra_tree.save()
+    st.pyplot(plt)
+    st.write(extra_tree.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/ExtraTreeClassifier.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

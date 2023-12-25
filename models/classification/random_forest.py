@@ -6,7 +6,7 @@ brief: Random Forest classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -32,6 +32,17 @@ class RandomForest(BaseModel):
             classes,
         )
 
+def app_random_forest(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    random_forest = RandomForest(X_train, X_test, y_train, y_test, 100, classes)
+    random_forest.run()
+    random_forest.save()
+    st.pyplot(plt)
+    st.write(random_forest.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/RandomForestClassifier.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

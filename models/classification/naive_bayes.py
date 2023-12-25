@@ -6,7 +6,7 @@ brief: Naive Bayes classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -25,6 +25,17 @@ class NaiveBayes(BaseModel):
             "GaussianNB", GaussianNB(), X_train, X_test, y_train, y_test, classes
         )
 
+def app_naive_bayes(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    naive_bayes = NaiveBayes(X_train, X_test, y_train, y_test, classes)
+    naive_bayes.run()
+    naive_bayes.save()
+    st.pyplot(plt)
+    st.write(naive_bayes.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/GaussianNB.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

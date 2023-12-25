@@ -36,6 +36,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.manifold import TSNE
 import os
 import sys
+import base64
+import streamlit as st
 from joblib import dump
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.linear_model import ElasticNet

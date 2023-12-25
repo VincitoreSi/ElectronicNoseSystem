@@ -5,15 +5,7 @@ date: 2023-12-16
 brief: Helper functions for the project
 """
 
-from dependencies.dependencies import (
-    plt,
-    itertools,
-    np,
-    pd,
-    confusion_matrix,
-    MaxAbsScaler,
-    train_test_split,
-)
+from dependencies.dependencies import *
 
 
 def lead_and_prepare_data():
@@ -112,28 +104,26 @@ def preprocess_data_clf(df):
     )
     return X_train, X_test, y_train, y_test
 
-def preprocess_data_reg(df):
-    # add extra two columns for gas conc. separating from '+' in conc. column 
-    # ppm1 will have the value of gas conc. when class is 1 and ppm2 will have the value of gas conc. when class is 2 and if class is 3 then split the conc. column and add two columns ppm1 and ppm2
-    df1 = df[df["GasType"] == 1]
-    df1 = df1.drop(columns=["GasType"], axis=1)
-    df1.reset_index(drop=True)
-    df1['ppm1'] = df1['ppm']
-    df1['ppm2'] = 0
-    df2 = df[df["GasType"] == 2]
-    df2 = df2.drop(columns=["GasType"], axis=1)
-    df2.reset_index(drop=True)
-    df2['ppm1'] = 0
-    df2['ppm2'] = df2['ppm']
-    df3 = df[df["GasType"] == 3]
-    df3 = df3.drop(columns=["GasType"], axis=1)
-    df3.reset_index(drop=True)
-    df3['ppm1'] = df3['ppm'].apply(lambda x: float(x.split('+')[0]))
-    df3['ppm2'] = df3['ppm'].apply(lambda x: float(x.split('+')[1]))
-    df = pd.concat([df1, df2, df3])
-    X = df.iloc[:, :-2]
-    y = df.iloc[:, -2:]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=1)
+def preprocess_data_reg(data, cls):
+    data_cls = data[data["GasType"] == cls]
+    if cls == 3:
+        data_cls = data_cls.drop(columns=["GasType"], axis=1)
+        data_cls['ppm1'] = data_cls['ppm'].apply(lambda x: float(x.split('+')[0]))
+        data_cls['ppm2'] = data_cls['ppm'].apply(lambda x: float(x.split('+')[1]))
+        data_cls = data_cls.drop(columns=["ppm"], axis=1)
+        data_cls = data_cls.reset_index(drop=True)
+        X = data_cls.iloc[:, :-2]
+        y = data_cls.iloc[:, -2:]
+    else:
+        data_cls = data_cls.drop(columns=["GasType"], axis=1)
+        data_cls = data_cls.reset_index(drop=True)
+        X = data_cls.iloc[:, :-1]
+        y = data_cls.iloc[:, -1]
+    print(data_cls.head())
+    print(f"X shape: {X.shape}\ny shape: {y.shape}")
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=1
+    )
     return X_train, X_test, y_train, y_test
 
 def load_gas_data_for_regression(path, cls):
@@ -160,6 +150,14 @@ def load_gas_data_for_regression(path, cls):
         X, y, test_size=0.1, random_state=1
     )
     return X_train, X_test, y_train, y_test
+
+# Function to download model
+def get_download_link(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{file_path}">Download Trained Model</a>'
+    return href
 
 if __name__ == "__main__":
     load_gas_data_for_regression("Data/data/expanded_data.csv", 3)

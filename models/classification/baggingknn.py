@@ -6,7 +6,7 @@ brief: Bagging classifier with KNN
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -51,6 +51,17 @@ class BaggingKNN(BaseModel):
             classes,
         )
 
+def app_baggingknn(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    baggingknn = BaggingKNN(X_train, X_test, y_train, y_test, classes, 100, 0.5, 0.5)
+    baggingknn.run()
+    baggingknn.save()
+    st.pyplot(plt)
+    st.write(baggingknn.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/BaggingKNN.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

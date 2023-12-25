@@ -6,7 +6,7 @@ brief: Voting classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -46,6 +46,17 @@ class VotingModel(BaseModel):
             "VotingClassifier", eclf, X_train, X_test, y_train, y_test, classes
         )
 
+def app_voting(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    voting = VotingModel(X_train, X_test, y_train, y_test, classes)
+    voting.run()
+    voting.save()
+    st.pyplot(plt)
+    st.write(voting.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/VotingClassifier.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

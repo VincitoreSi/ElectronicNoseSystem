@@ -6,7 +6,7 @@ brief: Logistic Regression classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -31,6 +31,17 @@ class LogisticModel(BaseModel):
             classes,
         )
 
+def app_logistic(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    logistic = LogisticModel(X_train, X_test, y_train, y_test, classes)
+    logistic.run()
+    logistic.save()
+    st.pyplot(plt)
+    st.write(logistic.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/LogisticRegression.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

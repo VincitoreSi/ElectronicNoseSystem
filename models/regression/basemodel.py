@@ -81,12 +81,12 @@ class BaseModel:
         """
         return self.model.predict(X)
 
-    def save(self, cls):
+    def save(self, cls, i=""):
         """
         Save the model
         :return: None
         """
-        dump(self.model, f"output/models/regression/{self.name}_{cls}.joblib")
+        dump(self.model, f"output/models/regression/{self.name}_{cls}{i}.joblib")
 
     def run(self):
         """

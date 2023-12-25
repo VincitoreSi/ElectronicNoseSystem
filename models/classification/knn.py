@@ -6,7 +6,7 @@ brief: KNN classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -32,6 +32,17 @@ class KNN(BaseModel):
             classes,
         )
 
+def app_knn(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    knn = KNN(X_train, X_test, y_train, y_test, 14, classes)
+    knn.run()
+    knn.save()
+    st.pyplot(plt)
+    st.write(knn.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/KNeighborsClassifier.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

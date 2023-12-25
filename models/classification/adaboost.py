@@ -6,7 +6,7 @@ brief: AdaBoost classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
 
 
@@ -38,6 +38,17 @@ class AdaBoost(BaseModel):
             classes,
         )
 
+def app_adaboost(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    adaboost = AdaBoost(X_train, X_test, y_train, y_test, 100, 1, classes)
+    adaboost.run()
+    adaboost.save()
+    st.pyplot(plt)
+    st.write(adaboost.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/AdaBoostClassifier.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """

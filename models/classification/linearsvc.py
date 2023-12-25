@@ -6,14 +6,8 @@ brief: LinearSVC classifier for the binary classification problem
 """
 
 from dependencies.dependencies import *
-from helper import plot_confusion_matrix, lead_and_prepare_data, load_gas_data
+from helper import *
 from .basemodel import BaseModel
-
-# clf = svm.LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
-#      intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-#      multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-#      verbose=0)
-# svm=clf.fit(X_train,y_train)
 
 
 class LinearSVCModel(BaseModel):
@@ -50,6 +44,17 @@ class LinearSVCModel(BaseModel):
             classes,
         )
 
+def app_linearsvc(X_train, X_test, y_train, y_test, classes):
+    """For Streamlit app"""
+    linear_svc = LinearSVCModel(X_train, X_test, y_train, y_test, classes)
+    linear_svc.run()
+    linear_svc.save()
+    st.pyplot(plt)
+    st.write(linear_svc.results)
+    st.markdown(
+        get_download_link(f"output/models/classification/LinearSVC.joblib"),
+        unsafe_allow_html=True,
+    )
 
 def main():
     """The main function"""

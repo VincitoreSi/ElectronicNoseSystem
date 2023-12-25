@@ -93,4 +93,4 @@ class BaseModel:
         Save the model
         :return: None
         """
-        dump(self.model, f"output/models/classification/{self.model_name}.pkl")
+        dump(self.model, f"output/models/classification/{self.model_name}.joblib")
