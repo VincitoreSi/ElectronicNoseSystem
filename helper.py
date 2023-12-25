@@ -99,7 +99,7 @@ def load_gas_data(path):
     y = data.iloc[:, -2]
     print(f"X shape: {X.shape}\ny shape: {y.shape}")
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.1, random_state=1
+        X, y, test_size=0.3, random_state=1
     )
     return X_train, X_test, y_train, y_test
 
@@ -116,10 +116,21 @@ def load_gas_data_for_regression(path, cls):
     print("Loading data...")
     data = pd.read_csv(path)
     data_cls = data[data["GasType"] == cls]
-    data_cls = data_cls.drop(columns=["GasType"], axis=1)
-    data_cls = data_cls.reset_index(drop=True)
-    X = data_cls.iloc[:, :-1]
-    y = data_cls.iloc[:, -1]
+    if cls == 3:
+        # then make extra column for gas conc. separating from '+' in conc. column
+        data_cls = data_cls.drop(columns=["GasType"], axis=1)
+        data_cls['ppm1'] = data_cls['ppm'].apply(lambda x: float(x.split('+')[0]))
+        data_cls['ppm2'] = data_cls['ppm'].apply(lambda x: float(x.split('+')[1]))
+        data_cls = data_cls.drop(columns=["ppm"], axis=1)
+        data_cls = data_cls.reset_index(drop=True)
+        X = data_cls.iloc[:, :-2]
+        y = data_cls.iloc[:, -2:]
+    else:
+        data_cls = data_cls.drop(columns=["GasType"], axis=1)
+        data_cls = data_cls.reset_index(drop=True)
+        X = data_cls.iloc[:, :-1]
+        y = data_cls.iloc[:, -1]
+    print(data_cls.head())
     print(f"X shape: {X.shape}\ny shape: {y.shape}")
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.1, random_state=1
@@ -127,4 +138,4 @@ def load_gas_data_for_regression(path, cls):
     return X_train, X_test, y_train, y_test
 
 if __name__ == "__main__":
-    load_gas_data_for_regression("Data/data/expanded_data.csv", 1)
+    load_gas_data_for_regression("Data/data/expanded_data.csv", 3)

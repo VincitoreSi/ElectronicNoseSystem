@@ -36,13 +36,19 @@ class BaseModel:
         """
         Train the model
         """
+        start = time.time()
         self.model.fit(self.X_train, self.y_train)
+        end = time.time()
+        self.results["train_time"] = end - start
 
     def test(self):
         """
         Test the model
         """
+        start = time.time()
         y_pred = self.model.predict(self.X_test)
+        end = time.time()
+        self.results["test_time"] = end - start
         print(f"Model: {self.name}")
         print(f"Mean Absolute Error: {mean_absolute_error(self.y_test, y_pred):.3f}")
         print(f"Mean Squared Error: {mean_squared_error(self.y_test, y_pred):.3f}")
@@ -51,6 +57,8 @@ class BaseModel:
         print(f"Explained Variance Score: {explained_variance_score(self.y_test, y_pred):.3f}")
         print(f"Max Error: {max_error(self.y_test, y_pred):.3f}")
         print(f"Mean Squared Log Error: {mean_squared_log_error(self.y_test, y_pred):.3f}")
+        print(f"Training Time: {self.results['train_time']:.3f}")
+        print(f"Test Time: {self.results['test_time']:.3f}")
         self.results["MAE"] = mean_absolute_error(self.y_test, y_pred)
         self.results["MSE"] = mean_squared_error(self.y_test, y_pred)
         self.results["MedAE"] = median_absolute_error(self.y_test, y_pred)

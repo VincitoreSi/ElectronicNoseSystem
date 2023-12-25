@@ -31,10 +31,17 @@ class LinearRegressionModel(BaseModel):
 
 def main():
     """The main function"""
-    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
-    linear_regression = LinearRegressionModel(X_train, X_test, y_train, y_test)
-    linear_regression.train()
-    linear_regression.test()
+    X_train, X_test, y_train, y_test = load_gas_data_for_regression("Data/data/expanded_data.csv", 1)
+    shape = 1 if len(y_train.shape) == 1 else y_train.shape[1]
+    if shape == 1:
+        linear_regression = LinearRegressionModel(X_train, X_test, y_train, y_test)
+        linear_regression.train()
+        linear_regression.test()
+    else:
+        for i in range(shape):
+            linear_regression = LinearRegressionModel(X_train, X_test, y_train.iloc[:, i], y_test.iloc[:, i])
+            linear_regression.train()
+            linear_regression.test()
 
 
 if __name__ == "__main__":

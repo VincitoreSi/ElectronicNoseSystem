@@ -35,8 +35,9 @@ class KNN(BaseModel):
 
 def main():
     """The main function"""
-    X_train, X_test, y_train, y_test = load_gas_data("Data/data/expanded_data.csv")
-    classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
+    X_train, X_test, y_train, y_test = load_gas_data("Data/data/data_update.csv")
+    # classes = {1: "Ethylene", 2: "Acetone", 3: "Ethylene + Acetone"}
+    classes = {1: "Ethylene", 2: "Acetone", 3: "A", 4: "B", 5: "C", 6: "D"}
     knn = KNN(X_train, X_test, y_train, y_test, 14, classes)
     knn.train()
     knn.test()

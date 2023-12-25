@@ -43,7 +43,6 @@ from sklearn.linear_model import SGDRegressor
 from sklearn.svm import SVR
 from sklearn.linear_model import BayesianRidge
 from sklearn.linear_model import LinearRegression
-# from xgboost import XGBRegressor
 
 from sklearn.metrics import (
     mean_absolute_error,
