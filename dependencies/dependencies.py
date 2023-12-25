@@ -38,7 +38,7 @@ import os
 import sys
 import base64
 import streamlit as st
-from joblib import dump
+from joblib import dump, load
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.linear_model import ElasticNet
 from sklearn.linear_model import SGDRegressor

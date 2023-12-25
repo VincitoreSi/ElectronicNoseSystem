@@ -181,18 +181,161 @@ if mode == "Training":
 
 elif mode == "Testing":
     st.header("Testing")
-
+    classes_num = st.number_input("Enter number of classes", min_value=1, max_value=10)
+    st.subheader("Enter Class Names")
+    classes = {}
+    cols = st.columns(classes_num)
+    for i in range(classes_num):
+        classes[i + 1] = cols[i].text_input(
+            f"Enter class {i+1} name", value=f"Class {i+1}"
+        )
     # Predict
     st.subheader("Predict")
-    if st.button("Predict"):
-        st.write("Predicted")
+    # ask for sensor values
+    sensor_num = st.number_input("Enter number of sensors", min_value=1, max_value=10)
+    sensor_values = []
+    # ask all of them in one line just like class names
+    cols = st.columns(sensor_num)
+    for i in range(sensor_num):
+        sensor_values.append(cols[i].number_input(f"Enter sensor {i+1} value"))
+    df = pd.DataFrame([sensor_values])
+    df.columns = ["Sensor " + str(i + 1) for i in range(sensor_num)]
+    print(df)
+    # ask for model
+    st.subheader("Select Classifier")
+    model = st.selectbox(
+        "Select a model",
+        (
+            "Naive Bayes",
+            "Logistic Regression",
+            "Random Forest",
+            "AdaBoost",
+            "VotingClassifier",
+            "KNN with Bagging",
+            "Decision Tree",
+            "Extra Trees",
+            "KNN",
+            "Linear SVC",
+        ),
+    )
+    if st.button("Predict Gas Type"):
+        if model == "KNN":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/KNeighborsClassifier.joblib",
+            )
+        elif model == "Naive Bayes":
+            ans = load_model_and_predict(
+                df, classes, "output/models/classification/GaussianNB.joblib"
+            )
 
-    # Evaluation
-    st.subheader("Evaluation")
-    if st.button("Evaluate"):
-        st.write("Evaluated")
+        elif model == "Logistic Regression":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/LogisticRegression.joblib",
+            )
 
-    # Visualization
-    st.subheader("Visualization")
-    if st.button("Visualize"):
-        st.write("Visualized")
+        elif model == "Random Forest":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/RandomForestClassifier.joblib",
+            )
+
+        elif model == "AdaBoost":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/AdaBoostClassifier.joblib",
+            )
+
+        elif model == "VotingClassifier":
+            ans = load_model_and_predict(
+                df, classes, "output/models/classification/VotingClassifier.joblib"
+            )
+
+        elif model == "KNN with Bagging":
+            ans = load_model_and_predict(
+                df, classes, "output/models/classification/BaggingKNN.joblib"
+            )
+
+        elif model == "Decision Tree":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/DecisionTreeClassifier.joblib",
+            )
+
+        elif model == "Extra Trees":
+            ans = load_model_and_predict(
+                df,
+                classes,
+                "output/models/classification/ExtraTreeClassifier.joblib",
+            )
+
+        elif model == "Linear SVC":
+            ans = load_model_and_predict(
+                df, classes, "output/models/classification/LinearSVC.joblib"
+            )
+
+    st.subheader("Select Regressor")
+    ans, name = load_model_and_predict(
+        df, classes, "output/models/classification/KNeighborsClassifier.joblib"
+    )
+    model = st.selectbox(
+        "Select a model",
+        (
+            "Linear Regression",
+            "Ridge Regression",
+            "Elastic Net",
+            "Support Vector Machine",
+            "SGD Regression",
+        ),
+    )
+    if st.button("Predict Gas Conc."):
+        if model == "Linear Regression":
+            if ans[0] < 3:
+                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}.joblib", name)
+            else:
+                name1 = name.split("+")[0]
+                name2 = name.split("+")[1]
+                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}{0}.joblib", name1)
+                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}{1}.joblib", name2)
+        
+        elif model == "Ridge Regression":
+            if ans[0] < 3:
+                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}.joblib", name)
+            else:
+                name1 = name.split("+")[0]
+                name2 = name.split("+")[1]
+                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}{0}.joblib", name1)
+                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}{1}.joblib", name2)
+        
+        elif model == "Elastic Net":
+            if ans[0] < 3:
+                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}.joblib", name)
+            else:
+                name1 = name.split("+")[0]
+                name2 = name.split("+")[1]
+                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}{0}.joblib", name1)
+                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}{1}.joblib", name2)
+        
+        elif model == "Support Vector Machine":
+            if ans[0] < 3:
+                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}.joblib", name)
+            else:
+                name1 = name.split("+")[0]
+                name2 = name.split("+")[1]
+                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}{0}.joblib", name1)
+                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}{1}.joblib", name2)
+
+        elif model == "SGD Regression":
+            if ans[0] < 3:
+                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}.joblib", name)
+            else:
+                name1 = name.split("+")[0]
+                name2 = name.split("+")[1]
+                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}{0}.joblib", name1)
+                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}{1}.joblib", name2)

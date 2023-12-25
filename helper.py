@@ -159,5 +159,19 @@ def get_download_link(file_path):
     href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{file_path}">Download Trained Model</a>'
     return href
 
+def load_model_and_predict(df, classes, path):
+    model = load(path)
+    ans = model.predict(df)
+    # get class name from class number
+    name = classes[ans[0]]
+    st.write(f"Predicted Gas Type: {name}")
+    return ans, name
+
+def load_model_and_predict_reg(df, path, i=""):
+    model = load(path)
+    ans = model.predict(df)
+    st.write(f"Predicted {i} Gas Concentration: {ans[0]} ppm")
+    return ans
+
 if __name__ == "__main__":
     load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
