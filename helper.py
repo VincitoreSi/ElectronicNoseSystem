@@ -18,6 +18,9 @@ def lead_and_prepare_data():
     # df = pd.read_csv(PATH3, delim_whitespace=True, names=columns)
     datatrain1 = pd.read_csv("Data/data/ethylene_CO.txt", delim_whitespace=True)
     datatrain2 = pd.read_csv("Data/data/ethylene_methane.txt", delim_whitespace=True)
+    # save in csv file
+    datatrain1.to_csv("Data/data/ethylene_CO.csv", index=False)
+    datatrain2.to_csv("Data/data/ethylene_methane.csv", index=False)
     X1 = np.array(datatrain1)
     X2 = np.array(datatrain2)
     print(X1.shape)
@@ -173,5 +176,20 @@ def load_model_and_predict_reg(df, path, i=""):
     st.write(f"Predicted {i} Gas Concentration: {ans[0]} ppm")
     return ans
 
+def txt_to_csv():
+    """
+    Load and prepare data
+    """
+    # Load data
+    print("Loading data...")
+    # columns = ["Time (seconds)", "Methane conc (ppm)", "Ethylene conc (ppm)"] + ["Sensor " + str(i) for i in range(1, 17)]
+    # df = pd.read_csv(PATH3, delim_whitespace=True, names=columns)
+    datatrain1 = pd.read_csv("Data/data/ethylene_CO.txt", delim_whitespace=True)
+    datatrain2 = pd.read_csv("Data/data/ethylene_methane.txt", delim_whitespace=True)
+    # save in csv file
+    datatrain1.to_csv("Data/data/ethylene_CO.csv", index=False)
+    datatrain2.to_csv("Data/data/ethylene_methane.csv", index=False)
+
 if __name__ == "__main__":
-    load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
+    # load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
+    txt_to_csv()
