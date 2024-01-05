@@ -162,18 +162,20 @@ def get_download_link(file_path):
     href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{file_path}">Download Trained Model</a>'
     return href
 
-def load_model_and_predict(df, classes, path):
+def load_model_and_predict(df, classes, path, stc, print_ans=True):
     model = load(path)
     ans = model.predict(df)
     # get class name from class number
     name = classes[ans[0]]
-    st.write(f"Predicted Gas Type: {name}")
+    if print_ans:
+        stc.markdown(f"## {name}")
     return ans, name
 
-def load_model_and_predict_reg(df, path, i=""):
+def load_model_and_predict_reg(df, path, stc,  i=""):
     model = load(path)
     ans = model.predict(df)
-    st.write(f"Predicted {i} Gas Concentration: {ans[0]} ppm")
+    # stc.write(f"Predicted {i} Gas Concentration: {ans[0]} ppm")
+    stc.metric(label=f"{i}", value=f"{ans[0]:.3f} ppm")
     return ans
 
 def txt_to_csv():
@@ -190,6 +192,48 @@ def txt_to_csv():
     datatrain1.to_csv("Data/data/ethylene_CO.csv", index=False)
     datatrain2.to_csv("Data/data/ethylene_methane.csv", index=False)
 
+def new_data(path):
+    print("Loading data...")
+    data = pd.read_excel(path)
+    # I have this data in the given form and I need to convert this dataframe such that it will have time, sensor 1 and sensor 2 , Gas Conc. and GasType columns and for each gas label there will be sensors values and gas label. How to transform given data in this form. Write code for this.
+    # new df will have columns: Time, Sensor 1, Sensor 2, Gas Conc., GasType
+    df = pd.DataFrame(columns=["Time", "Sensor 1", "Sensor 2", "Gas Conc.", "GasType"])
+    
+    print(data.head())
+
+def prepare(path):
+    df = pd.read_csv(path)
+    # drop last 10 columns
+    df = df.iloc[:, :-11]
+    # save csv
+    df.to_csv("Data/data/ethylene_methane_5.csv", index=False)
+
+def send_data_to_thingsPeak(path):
+    # write code to send data to thingsPeak
+    df = pd.read_csv(path)
+    channelID = "2395244"
+    writeAPIKey = "HLXRHH1FDD3SEVJQ"
+    channelWriteURL = "https://api.thingspeak.com/update?api_key="
+    for idx, col in enumerate(df.columns):
+        if col != "Time (seconds)":
+            data = df[col].values
+            for i in range(len(data)):
+                url = (
+                    channelWriteURL
+                    + writeAPIKey
+                    + "&field"
+                    + str(idx)
+                    + "="
+                    + str(data[i])
+                )
+                response = requests.get(url)
+                print(response.status_code)
+        print("---------")
+
+    print("Data sent to thingsPeak")
+
 if __name__ == "__main__":
     # load_gas_data_for_regression("Data/data/expanded_data.csv", 3)
-    txt_to_csv()
+    # new_data("Data/data/time_series_data.xlsx")
+    # prepare("Data/data/ethylene_methane.csv")
+    send_data_to_thingsPeak("Data/data/ethylene_methane_5.csv")

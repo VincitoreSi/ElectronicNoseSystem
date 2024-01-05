@@ -30,13 +30,85 @@ from helper import *
 from dimension_reduction import *
 
 st.set_page_config(page_title="ElectronicNoseSystem", page_icon="🌫️", layout="wide")
-st.title("Electronic Nose System for Gas Identification")
 
-mode = st.sidebar.selectbox("Select Mode", ["Training", "Testing"])
+with open("style.css") as css:
+    st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
+
+
+mode = option_menu(
+    menu_title="Main Menu",
+    menu_icon="cast",
+    options=["Home", "Training", "Testing", "Contact Us"],
+    icons=["🏠", "📚", "🧪", "📞"],
+    default_index=0,
+    orientation="horizontal",
+)   
+
+if mode == "Home":
+    col1, col2 = st.columns([1, 3], gap="large")
+
+    col1.markdown(
+        "# Electronic Nose System for Gas Identification and Concentration Estimation \n \n"
+    )
+    
+    col1.image("images/raspberry-pi-logo.png", use_column_width=True)
+    col1.image("images/thingsPeak.png", use_column_width=True)
+    col2.image("images/elecNose.png", use_column_width=True)
+    col2.markdown(
+        """
+
+### Introduction
+
+This is our project that is designing Electronic Nose System for Gas Sensor Array data. Project contain developing full pipeline which contains these steps primarily
+
+1. Collecting the data in the lab from sensors
+2. Uploading the data on thingsPeak using RaspberryPi in real time
+3. Analyzing data features using PCA, LDA and t-SNE plots etc.
+4. Applying various Machine Learning approaches as well as Deep Learning algorithms on the data to classify the gases present in the mixture from sensors value
+5. Using Regression based approaches predicting the concentration for the present gases in mixture.
+6. Developing the API for automation of the whole process and real time visualization as well as prediction from the sensors value.
+
+### Data Collection
+Sensor data is collected from the sensors in the lab using RaspberryPi. Data is collected in real time and uploaded on the thingsPeak. Data is collected for 10 different gases and 10 different concentration for each gas. Data is collected for 2 different sensors. Then data was interpolated and preprocessed for further analysis.
+
+### Applying Different Machine Learning Based Classifiers on Gas Sensor Dataset
+
+In this project, for gas classification and predicting concentration of gases in mixture various supervised machine learning classifiers were applied and their performance were compared.
+
+
+### Data Processing Workflow
+
+On both datasets, PCA and t-SNE dimension reduction techniques were applied in order to plot and visualize the relationships between different attributes.The same workflow was followed and the same classifiers were applied on both of the datasets. I applied 10 classical classifiers( non-neural network based) and 1 keras based vanilla neural network classifier.
+
+#### Classical Classifiers
+
+1. K-Nearest Neighbor (KNN)
+2. Support Vector Machine (SVM)
+3. Gaussian Multinomial Naive Bayes (MultinomialNB)
+4. Decision Tree
+5. Random Forest
+6. Extra Tree
+7. Logistic Regression
+8. KNN based Bagging
+9. Logistic Regression
+10. Majority Voting Ensemble Machine Learning Classifier
+
+#### Regression Models
+
+1. Linear Regression
+2. Ridge Regression
+3. Elastic Net
+4. Support Vector Machine
+5. SGD Regression
+
+        """
+    )
+
+# mode = st.sidebar.selectbox("Select Mode", ["Training", "Testing"])
 
 
 if mode == "Training":
-    st.header("Training")
+    st.markdown("# Training")
     # File upload
     st.subheader("Upload CSV file")
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -89,9 +161,11 @@ if mode == "Training":
                 tsne, y, "TSNE_on_gas_sensor_binary_dataset", ["TSNE1", "TSNE2"], legend
             )
             st.pyplot(plt)
+            
+        col1, col2 = st.columns(2)
 
         # Model selection
-        model_type = st.selectbox(
+        model_type = col1.selectbox(
             "Select Model Type",
             (
                 "Classification",
@@ -100,7 +174,7 @@ if mode == "Training":
         )
 
         if model_type == "Classification":
-            model = st.selectbox(
+            model = col2.selectbox(
                 "Select a model",
                 (
                     "Naive Bayes",
@@ -148,7 +222,7 @@ if mode == "Training":
                 app_linearsvc(X_train, X_test, y_train, y_test, classes)
 
         elif model_type == "Regression":
-            model = st.selectbox(
+            model = col2.selectbox(
                 "Select a model",
                 (
                     "Linear Regression",
@@ -180,7 +254,7 @@ if mode == "Training":
                     app_sgd(data, i + 1)
 
 elif mode == "Testing":
-    st.header("Testing")
+    st.markdown("# Testing")
     classes_num = st.number_input("Enter number of classes", min_value=1, max_value=10)
     st.subheader("Enter Class Names")
     classes = {}
@@ -202,8 +276,9 @@ elif mode == "Testing":
     df.columns = ["Sensor " + str(i + 1) for i in range(sensor_num)]
     print(df)
     # ask for model
-    st.subheader("Select Classifier")
-    model = st.selectbox(
+    col1, col2 = st.columns(2)
+    col1.subheader("Select Classifier")
+    model = col1.selectbox(
         "Select a model",
         (
             "Naive Bayes",
@@ -218,16 +293,18 @@ elif mode == "Testing":
             "Linear SVC",
         ),
     )
-    if st.button("Predict Gas Type"):
+    if col1.button("Predict Gas Type"):
         if model == "KNN":
             ans = load_model_and_predict(
                 df,
                 classes,
                 "output/models/classification/KNeighborsClassifier.joblib",
+                col1
             )
         elif model == "Naive Bayes":
             ans = load_model_and_predict(
-                df, classes, "output/models/classification/GaussianNB.joblib"
+                df, classes, "output/models/classification/GaussianNB.joblib",
+                col1
             )
 
         elif model == "Logistic Regression":
@@ -235,6 +312,7 @@ elif mode == "Testing":
                 df,
                 classes,
                 "output/models/classification/LogisticRegression.joblib",
+                col1
             )
 
         elif model == "Random Forest":
@@ -242,6 +320,7 @@ elif mode == "Testing":
                 df,
                 classes,
                 "output/models/classification/RandomForestClassifier.joblib",
+                col1
             )
 
         elif model == "AdaBoost":
@@ -249,16 +328,19 @@ elif mode == "Testing":
                 df,
                 classes,
                 "output/models/classification/AdaBoostClassifier.joblib",
+                col1
             )
 
         elif model == "VotingClassifier":
             ans = load_model_and_predict(
-                df, classes, "output/models/classification/VotingClassifier.joblib"
+                df, classes, "output/models/classification/VotingClassifier.joblib",
+                col1
             )
 
         elif model == "KNN with Bagging":
             ans = load_model_and_predict(
-                df, classes, "output/models/classification/BaggingKNN.joblib"
+                df, classes, "output/models/classification/BaggingKNN.joblib",
+                col1
             )
 
         elif model == "Decision Tree":
@@ -266,6 +348,7 @@ elif mode == "Testing":
                 df,
                 classes,
                 "output/models/classification/DecisionTreeClassifier.joblib",
+                col1
             )
 
         elif model == "Extra Trees":
@@ -273,18 +356,20 @@ elif mode == "Testing":
                 df,
                 classes,
                 "output/models/classification/ExtraTreeClassifier.joblib",
+                col1
             )
 
         elif model == "Linear SVC":
             ans = load_model_and_predict(
-                df, classes, "output/models/classification/LinearSVC.joblib"
+                df, classes, "output/models/classification/LinearSVC.joblib",
+                col1
             )
 
-    st.subheader("Select Regressor")
+    col2.subheader("Select Regressor")
     ans, name = load_model_and_predict(
-        df, classes, "output/models/classification/KNeighborsClassifier.joblib"
+        df, classes, "output/models/classification/KNeighborsClassifier.joblib", col2, print_ans=False
     )
-    model = st.selectbox(
+    model = col2.selectbox(
         "Select a model",
         (
             "Linear Regression",
@@ -294,48 +379,117 @@ elif mode == "Testing":
             "SGD Regression",
         ),
     )
-    if st.button("Predict Gas Conc."):
+    if col2.button("Predict Gas Conc."):
         if model == "Linear Regression":
             if ans[0] < 3:
-                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}.joblib", name)
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/LinearRegression_{ans[0]}.joblib",
+                    col2,
+                    name,
+                )
             else:
                 name1 = name.split("+")[0]
                 name2 = name.split("+")[1]
-                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}{0}.joblib", name1)
-                load_model_and_predict_reg(df, f"output/models/regression/LinearRegression_{ans[0]}{1}.joblib", name2)
-        
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/LinearRegression_{ans[0]}{0}.joblib",
+                    col2,
+                    name1,
+                )
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/LinearRegression_{ans[0]}{1}.joblib",
+                    col2,
+                    name2,
+                )
+
         elif model == "Ridge Regression":
             if ans[0] < 3:
-                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}.joblib", name)
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/BayesianRidge_{ans[0]}.joblib", col2, name
+                )
             else:
                 name1 = name.split("+")[0]
                 name2 = name.split("+")[1]
-                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}{0}.joblib", name1)
-                load_model_and_predict_reg(df, f"output/models/regression/BayesianRidge_{ans[0]}{1}.joblib", name2)
-        
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/BayesianRidge_{ans[0]}{0}.joblib",
+                    col2,
+                    name1,
+                )
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/BayesianRidge_{ans[0]}{1}.joblib",
+                    col2,
+                    name2,
+                )
+
         elif model == "Elastic Net":
             if ans[0] < 3:
-                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}.joblib", name)
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/ElasticNet_{ans[0]}.joblib", 
+                    col2,
+                    name,
+                )
             else:
                 name1 = name.split("+")[0]
                 name2 = name.split("+")[1]
-                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}{0}.joblib", name1)
-                load_model_and_predict_reg(df, f"output/models/regression/ElasticNet_{ans[0]}{1}.joblib", name2)
-        
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/ElasticNet_{ans[0]}{0}.joblib", col2, name1
+                )
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/ElasticNet_{ans[0]}{1}.joblib", col2, name2
+                )
+
         elif model == "Support Vector Machine":
             if ans[0] < 3:
-                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}.joblib", name)
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/SVMRegression_{ans[0]}.joblib", col2, name
+                )
             else:
                 name1 = name.split("+")[0]
                 name2 = name.split("+")[1]
-                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}{0}.joblib", name1)
-                load_model_and_predict_reg(df, f"output/models/regression/SVMRegression_{ans[0]}{1}.joblib", name2)
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/SVMRegression_{ans[0]}{0}.joblib",
+                    col2,
+                    name1,
+                )
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/SVMRegression_{ans[0]}{1}.joblib",
+                    col2,
+                    name2,
+                )
 
         elif model == "SGD Regression":
             if ans[0] < 3:
-                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}.joblib", name)
+                load_model_and_predict_reg(
+                    df, f"output/models/regression/SGDRegressor_{ans[0]}.joblib", col2, name
+                )
             else:
                 name1 = name.split("+")[0]
                 name2 = name.split("+")[1]
-                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}{0}.joblib", name1)
-                load_model_and_predict_reg(df, f"output/models/regression/SGDRegressor_{ans[0]}{1}.joblib", name2)
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/SGDRegressor_{ans[0]}{0}.joblib",
+                    col2,
+                    name1
+                )
+                load_model_and_predict_reg(
+                    df,
+                    f"output/models/regression/SGDRegressor_{ans[0]}{1}.joblib",
+                    col2,
+                    name2
+                )
+
+if mode == "Contact Us":
+    st.markdown("## Contact Us")
+    st.markdown(
+        """
+        #### Team Members
+        1. [Tushar Kumar](https://github.com/VincitoreSi)
+        2. [Uday Bhanu](https://github.com/udaybhanu43)
+        """
+    )
