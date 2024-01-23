@@ -163,6 +163,19 @@ def get_download_link(file_path):
     return href
 
 def load_model_and_predict(df, classes, path, stc, print_ans=True):
+    """Loads a pre-trained model and uses it to make predictions on the provided data frame.
+
+    Args:
+      df: Pandas DataFrame containing the input data to make predictions on.
+      classes: List of class name strings corresponding to the model's numeric outputs.
+      path: File path to the pre-trained model file.
+      stc: Streamlit component to print the results to.
+      print_ans: Whether to print the prediction result to stc.
+
+    Returns:
+      ans: NumPy array of predicted class numbers.
+      name: Class name corresponding to the predicted class number.
+    """
     model = load(path)
     ans = model.predict(df)
     # get class name from class number

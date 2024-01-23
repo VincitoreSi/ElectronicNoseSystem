@@ -1,0 +1,184 @@
+Naive Bayes
+"training_time":0.0035834312438964844
+"testing_time":0.0010838508605957031
+"accuracy":0.8428571428571429
+"confusion_matrix":"array([[26,  1,  0],
+       [ 4, 13,  3],
+       [ 3,  0, 20]])"
+
+Logistic Regression
+{
+"training_time":0.013283252716064453
+"testing_time":0.0014929771423339844
+"accuracy":0.7571428571428571
+"confusion_matrix":"array([[17,  0, 10],
+       [ 7, 13,  0],
+       [ 0,  0, 23]])"
+}
+
+Random Forest
+{
+"training_time":0.1749415397644043
+"testing_time":0.007708311080932617
+"accuracy":0.9714285714285714
+"confusion_matrix":"array([[25,  2,  0],
+       [ 0, 20,  0],
+       [ 0,  0, 23]])"
+}
+
+AdaBoost
+{
+"training_time":0.24499011039733887
+"testing_time":0.019042015075683594
+"accuracy":0.8857142857142857
+"confusion_matrix":"array([[22,  5,  0],
+       [ 3, 17,  0],
+       [ 0,  0, 23]])"
+}
+
+Voting Classifier
+{
+"training_time":0.07870793342590332
+"testing_time":0.010058403015136719
+"accuracy":0.8714285714285714
+"confusion_matrix":"array([[25,  0,  2],
+       [ 7, 13,  0],
+       [ 0,  0, 23]])"
+}
+
+KNN with Bagging
+{
+"training_time":0.1607823371887207
+"testing_time":0.07612013816833496
+"accuracy":0.8714285714285714
+"confusion_matrix":"array([[21,  2,  4],
+       [ 0, 17,  3],
+       [ 0,  0, 23]])"
+}
+
+Decision Tree
+{
+"training_time":0.0030014514923095703
+"testing_time":0.0011968612670898438
+"accuracy":0.9571428571428572
+"confusion_matrix":"array([[24,  3,  0],
+       [ 0, 20,  0],
+       [ 0,  0, 23]])"
+}
+
+Extra Trees
+{
+"training_time":0.0031442642211914062
+"testing_time":0.001306295394897461
+"accuracy":0.9571428571428572
+"confusion_matrix":"array([[24,  3,  0],
+       [ 0, 20,  0],
+       [ 0,  0, 23]])"
+}
+
+KNN
+{
+"training_time":0.09839391708374023
+"testing_time":0.008216381072998047
+"accuracy":1
+"confusion_matrix":"array([[27,  0,  0],
+       [ 0, 20,  0],
+       [ 0,  0, 23]])"
+}
+
+Linear SVC
+{
+"training_time":0.05672168731689453
+"testing_time":0.0010743141174316406
+"accuracy":0.6142857142857143
+"confusion_matrix":"array([[11,  0, 16],
+       [ 7, 13,  0],
+       [ 0,  4, 19]])"
+}
+
+Linear Regression - Class 1
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0031	0.0012	10.1363	147.6268	9.4004	0.9812	0.9813	24.3990	0.0146
+
+Linear Regression - Class 2
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0025	0.0011	19.0509	687.1585	10.0578	0.9940	0.9940	57.0740	0.0010
+
+Linear Regression - Class 1 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0020	0.0012	11.2244	225.0534	7.9821	0.9714	0.9714	35.3685	0.0127
+
+Linear Regression - Class 2 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0024	0.0008	42.3521	3,239.2127	27.2171	0.9718	0.9718	135.5558	0.0141
+
+
+Ridge Regression - Class 1
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0023	0.0008	10.0897	146.7646	9.2203	0.9813	0.9814	24.4228	0.0145
+
+Ridge Regression - Class 2
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0021	0.0007	19.0827	690.5407	9.8136	0.9940	0.9940	57.3112	0.0010
+
+Ridge Regression - Class 1 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0020	0.0007	11.2210	225.6352	8.0122	0.9713	0.9713	35.4104	0.0127
+
+Ridge Regression - Class 2 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0021	0.0008	42.3391	3,248.0337	27.3333	0.9717	0.9717	135.7178	0.0141
+
+Elastic Net - Class 1
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0029	0.0013	12.3701	215.9342	13.5521	0.9725	0.9726	27.2278	0.0257
+
+Elastic Net - Class 2
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0029	0.0012	26.9800	1,410.4077	18.8484	0.9877	0.9877	90.0867	0.0029
+
+Elastic Net - Class 1 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0025	0.0012	42.4299	2,297.7650	39.5226	0.7078	0.7079	89.7228	0.1138
+
+Elastic Net - Class 2 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0025	0.0012	162.6357	33,449.8059	151.5497	0.7086	0.7087	342.2372	0.1166
+
+
+Support Vector Machine - Class 1
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0027	0.0010	33.5448	1,677.0701	24.9161	0.7867	0.7886	73.0703	0.1192
+
+Support Vector Machine - Class 2
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0052	0.0017	242.8430	81,180.1695	216.5754	0.2928	0.3194	510.2679	0.2473
+
+Support Vector Machine - Class 1 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0046	0.0011	44.0999	2,990.6102	36.8219	0.6196	0.6593	109.4554	0.1003
+
+Support Vector Machine - Class 2 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0030	0.0011	264.3083	94,462.0722	227.2211	0.1771	0.2111	539.4554	0.2812
+
+
+SGD Regression - Class 1
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0029	0.0008	10.7266	180.7380	9.0230	0.9770	0.9775	29.7015	0.0163
+
+SGD Regression - Class 2
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0027	0.0011	24.8705	1,028.7196	19.9293	0.9910	0.9912	70.5012	0.0028
+
+
+SGD Regression - Class 1 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0062	0.0013	16.4691	512.3599	9.3483	0.9348	0.9349	47.1174	0.0238
+
+
+SGD Regression - Class 2 in Mixture
+train_time	test_time	MAE	MSE	MedAE	R2	EVS	ME	MSLE
+0.0059	0.0011	63.9282	7,589.5280	37.7097	0.9339	0.9340	182.0472	0.0260
+
+
